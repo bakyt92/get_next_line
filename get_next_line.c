@@ -1,4 +1,9 @@
-//
-// Created by Ultron Fitzhugh on 12/12/21.
-//
+#include "get_next_line.h"
+#include <sys/stat.h>
 
+int main (void)
+{
+	int fd;
+
+	fd = open("text_test.txt", O_RDONLY)
+}
