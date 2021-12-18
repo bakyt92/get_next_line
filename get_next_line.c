@@ -12,19 +12,26 @@
 
 #include "get_next_line.h"
 
+char *get_next_line(int fd)
+{
+	char		*buf;
+	static char *str;
+
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (0);
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
+		return (0);
+	while ()
+
+}
+
 int main (void)
 {
 	int fd;
 
-
 	fd = open("text_test.txt", O_RDONLY);
-	if (fd < 0)
-		x == 0;
+	get_next_line(fd);
 	return (0);
-
 }
 
-char *get_next_line(int fd)
-{
-
-}
