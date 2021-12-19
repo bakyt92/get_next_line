@@ -25,43 +25,50 @@ char	*ft_strchr(const char *s, int ch)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	len1;
-	size_t	len2;
 	char	*dest;
+	int		i;
+	int		j;
 
 	if (!s1 || !s2)
 		return (NULL);
-	len1 = ft_strlen((char *)s1);
-	len2 = ft_strlen((char *)s2);
-	dest = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	dest = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1) +
+			ft_strlen((char *)s2) + 1));
 	if (!dest)
 		return (NULL);
-	dest = ft_dest(s1, s2, dest);
-	return (dest);
-}
-
-static char	*ft_dest(char const *s1, char const *s2, char *dest)
-{
-	size_t	len1;
-	size_t	len2;
-	size_t	i;
-
-	len1 = ft_strlen((char *)s1);
-	len2 = ft_strlen((char *)s2);
 	i = 0;
-	while (i < len1)
-	{
+	while (s1[i++])
 		dest[i] = s1[i];
-		i++;
-	}
-	while (i < len2 + len1)
-	{
-		dest[i] = s2[i - len1];
-		i++;
-	}
-	dest[i] = '\0';
+	j = 0;
+	while (s2[j++])
+		dest[i + j] = s1[j];
+		j++;
+//	free(s1);
+	dest[i + j] = '\0';
 	return (dest);
 }
+
+//static char	*ft_dest(char const *s1, char const *s2, char *dest)
+//{
+//	size_t	len1;
+//	size_t	len2;
+//	size_t	i;
+//
+//	len1 = ft_strlen((char *)s1);
+//	len2 = ft_strlen((char *)s2);
+//	i = 0;
+//	while (i < len1)
+//	{
+//		dest[i] = s1[i];
+//		i++;
+//	}
+//	while (i < len2 + len1)
+//	{
+//		dest[i] = s2[i - len1];
+//		i++;
+//	}
+//	dest[i] = '\0';
+//	return (dest);
+//}
 
 size_t	ft_strlen(const char *str)
 {

@@ -103,12 +103,12 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main (void)
-{
-	int fd;
-
-	fd = open("test_text.txt", O_RDONLY);
-	get_next_line(fd);
-	return (0);
-}
+//int	main (void)
+//{
+//	int fd;
+//
+//	fd = open("test_text.txt", O_RDONLY);
+//	get_next_line(fd);
+//	return (0);
+//}
 
