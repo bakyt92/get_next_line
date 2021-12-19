@@ -40,7 +40,7 @@ char	*ft_del_one_line(char *main_str)
 char	*ft_get_one_line(char *main_str)
 {
 	int		i;
-	char *line;
+	char 	*line;
 
 	i = 0;
 	if(!main_str[i])

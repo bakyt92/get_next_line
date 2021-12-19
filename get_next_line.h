@@ -10,12 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INC_03_GET_NEXT_LINE_GET_NEXT_LINE_H
-# define INC_03_GET_NEXT_LINE_GET_NEXT_LINE_H
-# include <sys/stat.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
 # include <unistd.h>
-# include <fcntl.h>
 # include <stdlib.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 char		*ft_strchr(const char *s, int ch);
 char		*ft_read_text(int fd, char *buf, char *str_main);
@@ -26,15 +27,13 @@ char		*get_next_line(int fd);
 char		*ft_get_one_line(char *main_str);
 char		*ft_del_one_line(char *main_str);
 
-#ifdefined BUFFER_SIZE
-#if BUFFER_SIZE < 0
-# undef BUFFER_SIZE
-# define BUFFER_SIZE 0
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-
+//#ifdefined BUFFER_SIZE
+//#if BUFFER_SIZE < 0
+//# undef BUFFER_SIZE
+//# define BUFFER_SIZE 0
+//
+//# ifndef BUFFER_SIZE
+//#  define BUFFER_SIZE 42
+//# endif
 
 # endif

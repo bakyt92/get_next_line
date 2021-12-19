@@ -23,6 +23,23 @@ char	*ft_strchr(const char *s, int ch)
 	return ((char *)s);
 }
 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	len1;
+	size_t	len2;
+	char	*dest;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen((char *)s1);
+	len2 = ft_strlen((char *)s2);
+	dest = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!dest)
+		return (NULL);
+	dest = ft_dest(s1, s2, dest);
+	return (dest);
+}
+
 static char	*ft_dest(char const *s1, char const *s2, char *dest)
 {
 	size_t	len1;
@@ -43,23 +60,6 @@ static char	*ft_dest(char const *s1, char const *s2, char *dest)
 		i++;
 	}
 	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	len1;
-	size_t	len2;
-	char	*dest;
-
-	if (!s1 || !s2)
-		return (NULL);
-	len1 = ft_strlen((char *)s1);
-	len2 = ft_strlen((char *)s2);
-	dest = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!dest)
-		return (NULL);
-	dest = ft_dest(s1, s2, dest);
 	return (dest);
 }
 
