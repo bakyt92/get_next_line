@@ -66,7 +66,7 @@ char	*ft_get_one_line(char *main_str)
 
 char	*ft_read_text(int fd, char *buf, char *str_main)
 {
-	int	byte_read;
+	ssize_t	byte_read;
 
 	byte_read = 1;
 	while(!ft_strchr(str_main, '\n') && byte_read != 0)

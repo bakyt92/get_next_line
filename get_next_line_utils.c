@@ -14,36 +14,51 @@
 
 char	*ft_strchr(const char *s, int ch)
 {
-	while (*s != (unsigned char)ch)
+	if (!s)
+		return (0);
+	while (*s)
 	{
-		if (*s == '\0')
-			return (NULL);
-		s++;
+		if (*s == (char)ch)
+			return((char *)s);
+		else s++;
 	}
-	return ((char *)s);
+	if (*s == (char)ch)
+		return((char *)s);
+	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*dest;
 	int		i;
 	int		j;
 
+	if (!s1)
+	{
+		s1 = (char *) malloc (1 * sizeof(char));
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
-	dest = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1) +
-			ft_strlen((char *)s2) + 1));
+	dest = (char *)malloc(sizeof(char) * (ft_strlen((s1) +
+													ft_strlen(s2) + 1)));
 	if (!dest)
 		return (NULL);
 	i = 0;
-	while (s1[i++])
+	while (s1[i])
+	{
 		dest[i] = s1[i];
+		i++;
+	}
 	j = 0;
-	while (s2[j++])
-		dest[i + j] = s1[j];
+	while (s2[j])
+	{
+		dest[i] = s2[j];
 		j++;
+		i++;
+	}
 //	free(s1);
-	dest[i + j] = '\0';
+	dest[i] = '\0';
 	return (dest);
 }
 
