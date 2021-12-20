@@ -29,11 +29,12 @@ char	*ft_del_one_line(char *main_str)
 	temp = (char *)malloc(sizeof(char) * (ft_strlen(main_str) - i + 1));
 	if (!temp)
 		return(NULL);
+	i++;
 	j = 0;
 	while (main_str[i])
 		temp[j++] = main_str[i++];
-	temp[j] = '\0';
-	free(main_str);
+//	temp[j] = '\0';
+//	free(main_str);
 	return (temp);
 }
 
@@ -61,41 +62,38 @@ char	*ft_get_one_line(char *main_str)
 		line[i] = main_str[i];
 		i++;
 	}
+	line[i] = '\0';
 	return(line);
 }
 
-char	*ft_read_text(int fd, char *buf, char *str_main)
+char	*ft_read_text(int fd, char *str_main)
 {
 	ssize_t	byte_read;
+	char 	buf[BUFFER_SIZE + 1];
 
 	byte_read = 1;
 	while(!ft_strchr(str_main, '\n') && byte_read != 0)
 	{
 		byte_read = read(fd, buf, BUFFER_SIZE);
 		if (byte_read == -1)
-		{
-			free(buf);
 			return (0);
-		}
 		buf[byte_read] = '\0';
 		str_main = ft_strjoin(str_main, buf);
 	}
-	free(buf);
 	return (str_main);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*buf;
 	char		*line;
 	static char *str_main;
 
+	line = "";
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
-	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buf)
-		return (0);
-	str_main = ft_read_text(fd, buf, str_main);
+	if (read(fd, line, 0) < 0)
+		return (NULL);
+	str_main = ft_read_text(fd, str_main);
 	if (!str_main)
 		return (NULL);
 	line = ft_get_one_line(str_main);

@@ -57,7 +57,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 		i++;
 	}
-//	free(s1);
+	free(s1);
 	dest[i] = '\0';
 	return (dest);
 }
