@@ -12,6 +12,24 @@
 
 #include "get_next_line.h"
 
+char	*ft_strdup(const char *s)
+{
+	size_t	i;
+	char	*dest;
+
+	i = 0;
+	dest = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) + 1));
+	if (!dest)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		dest[i] = s[i];
+		++i;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
 char	*ft_strchr(const char *s, int ch)
 {
 	if (!s)
@@ -27,40 +45,77 @@ char	*ft_strchr(const char *s, int ch)
 	return (0);
 }
 
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+
+	i = 0;
+	if (dstsize >= 1)
+	{
+		while ((i <= dstsize - 1) && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*dest;
-	int		i;
-	int		j;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*strcat;
 
-	if (!s1)
-	{
-		s1 = (char *) malloc (1 * sizeof(char));
-		s1[0] = '\0';
-	}
 	if (!s1 || !s2)
 		return (NULL);
-	dest = (char *)malloc(sizeof(char) * (ft_strlen((s1) +
-													ft_strlen(s2) + 1)));
-	if (!dest)
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	strcat = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (!strcat)
 		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		dest[i] = s2[j];
-		j++;
-		i++;
-	}
-	free(s1);
-	dest[i] = '\0';
-	return (dest);
+	ft_strlcpy(strcat, s1, s1_len + 1);
+	ft_strlcpy(&strcat[s1_len], s2, s2_len + 1);
+	free (s1);
+	return (strcat);
 }
+
+//
+//char	*ft_strjoin(char *s1, char *s2)
+//{
+//	char	*dest;
+//	int		i;
+//	int		j;
+//
+//	if (!s1)
+//	{
+//		s1 = (char *) malloc (1 * sizeof(char));
+//		s1[0] = '\0';
+//	}
+//	if (!s1 || !s2)
+//		return (NULL);
+//	dest = (char *)malloc(sizeof(char) * (ft_strlen((s1) +
+//													ft_strlen(s2) + 1)));
+//	if (!dest)
+//		return (NULL);
+//	i = 0;
+//	while (s1[i])
+//	{
+//		dest[i] = s1[i];
+//		i++;
+//	}
+//	j = 0;
+//	while (s2[j])
+//	{
+//		dest[i] = s2[j];
+//		j++;
+//		i++;
+//	}
+//	free(s1);
+//	dest[i] = '\0';
+//	return (dest);
+//}
 
 //static char	*ft_dest(char const *s1, char const *s2, char *dest)
 //{

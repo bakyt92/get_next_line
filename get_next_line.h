@@ -18,10 +18,13 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
+char	*ft_strdup(const char *s);
 char		*ft_strchr(const char *s, int ch);
 //char		*ft_read_text(int fd, char *str_main);
 //static char	*ft_dest(char const *s1, char const *s2, char *dest);
-char		*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+
 size_t		ft_strlen(const char *str);
 char		*get_next_line(int fd);
 char		*ft_get_one_line(char *main_str);
@@ -33,7 +36,7 @@ char		*ft_del_one_line(char *main_str);
 //# define BUFFER_SIZE 0
 //
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 # endif

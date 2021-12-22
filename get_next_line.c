@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*ft_del_one_line(char *main_str)
 {
@@ -48,7 +49,8 @@ char	*ft_get_one_line(char *main_str)
 		return (NULL);
 	while (main_str[i] && main_str[i] != '\n')
 		i++;
-	line = (char *)malloc(sizeof(char) * (i + 1));
+	line = (char *)malloc(sizeof(char) * (i + 2)); /* добавил +2, т.к. есть
+ * знак конца строки */
 	if (!line)
 		return(NULL);
 	i = 0;
@@ -78,7 +80,13 @@ char	*ft_read_text(int fd, char *str_main)
 		if (byte_read == -1)
 			return (0);
 		buf[byte_read] = '\0';
+
+//		printf("\n before strjoin1 \n");
+//		printf(" check3str_main = %s \n", str_main);
+//		printf("\n buf = %s \n", buf);
 		str_main = ft_strjoin(str_main, buf);
+//		printf(" check4str_main = %s \n", str_main);
+//		printf("\n after strjoin2 \n");
 	}
 	return (str_main);
 }
@@ -88,25 +96,52 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char *str_main;
 
+	if (!str_main)
+		str_main = ft_strdup("");
 	line = "";
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
 	if (read(fd, line, 0) < 0)
 		return (NULL);
+//	printf(" check1 \n");
 	str_main = ft_read_text(fd, str_main);
+//	printf(" check2 %s\n ", str_main);
 	if (!str_main)
 		return (NULL);
+//	printf("str_main_bef %s\n", str_main);
 	line = ft_get_one_line(str_main);
 	str_main = ft_del_one_line(str_main);
+//	printf("str_main_aft %s\n", str_main);
+
 	return (line);
 }
+/*
+int	main (void)
+{
+	int fd;
+	char *line;
 
-//int	main (void)
-//{
-//	int fd;
-//
-//	fd = open("test_text.txt", O_RDONLY);
-//	get_next_line(fd);
-//	return (0);
-//}
+	line = "";
+	fd = open("test_text.txt", O_RDONLY);
+//	printf("%d", fd);
+	while (line)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		free (line);
+	}
+//	line = get_next_line(fd);
+//	printf(" main_1 %s \n", line);
+//	free (line);
+//	line = get_next_line(fd);
+//	printf(" main_2 %s \n", line);
+//	free (line);
+//printf("main_1 %s" ,get_next_line(fd));
+//	printf("main_2 %s" ,get_next_line(fd));
+//	printf("%s" ,get_next_line(fd));
+//	printf("%s" ,get_next_line(fd));
 
+	close(fd);
+	return (0);
+}
+*/
