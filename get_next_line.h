@@ -19,7 +19,7 @@
 # include <fcntl.h>
 
 char		*ft_strchr(const char *s, int ch);
-char		*ft_read_text(int fd, char *str_main);
+//char		*ft_read_text(int fd, char *str_main);
 //static char	*ft_dest(char const *s1, char const *s2, char *dest);
 char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlen(const char *str);

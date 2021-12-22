@@ -23,17 +23,17 @@ char	*ft_del_one_line(char *main_str)
 		i++;
 	if(!main_str[i])
 	{
-		free(main_str);
+//		free(main_str);
 		return (NULL);
 	}
-	temp = (char *)malloc(sizeof(char) * (ft_strlen(main_str) - i + 1));
+	temp = (char *) malloc(sizeof(char) * (ft_strlen(main_str) - i + 1));
 	if (!temp)
 		return(NULL);
 	i++;
 	j = 0;
 	while (main_str[i])
 		temp[j++] = main_str[i++];
-//	temp[j] = '\0';
+	temp[j] = '\0';
 //	free(main_str);
 	return (temp);
 }
