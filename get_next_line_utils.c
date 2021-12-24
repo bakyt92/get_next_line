@@ -67,7 +67,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	s1_len;
 	size_t	s2_len;
 	char	*strcat;
-
+	if (!s1)
+	{
+		s1 = (char *) malloc (1 * sizeof(char));
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);

@@ -24,7 +24,7 @@ char	*ft_del_one_line(char *main_str)
 		i++;
 	if(!main_str[i])
 	{
-//		free(main_str);
+		main_str = NULL;
 		return (NULL);
 	}
 	temp = (char *) malloc(sizeof(char) * (ft_strlen(main_str) - i + 1));
@@ -43,6 +43,7 @@ char	*ft_get_one_line(char *main_str)
 {
 	int		i;
 	char 	*line;
+	static int 	leaks_line;
 
 	i = 0;
 	if(!main_str[i])
@@ -51,6 +52,7 @@ char	*ft_get_one_line(char *main_str)
 		i++;
 	line = (char *)malloc(sizeof(char) * (i + 2)); /* добавил +2, т.к. есть
  * знак конца строки */
+	printf("leaks_line %d\t", leaks_line++);
 	if (!line)
 		return(NULL);
 	i = 0;
@@ -72,6 +74,7 @@ char	*ft_read_text(int fd, char *str_main)
 {
 	ssize_t	byte_read;
 	char 	buf[BUFFER_SIZE + 1];
+	char	*temp;
 
 	byte_read = 1;
 	while(!ft_strchr(str_main, '\n') && byte_read != 0)
@@ -80,11 +83,17 @@ char	*ft_read_text(int fd, char *str_main)
 		if (byte_read == -1)
 			return (0);
 		buf[byte_read] = '\0';
+//		temp = (char *)malloc((ft_strlen(str_main) + 1) * sizeof(char));
+//		if (!temp)
+//			return(NULL);
 
 //		printf("\n before strjoin1 \n");
 //		printf(" check3str_main = %s \n", str_main);
 //		printf("\n buf = %s \n", buf);
+//		temp = str_main;
 		str_main = ft_strjoin(str_main, buf);
+//		str_main = ft_strdup(temp);
+//		free(temp);
 //		printf(" check4str_main = %s \n", str_main);
 //		printf("\n after strjoin2 \n");
 	}
@@ -98,7 +107,7 @@ char	*get_next_line(int fd)
 
 	if (!str_main)
 		str_main = ft_strdup("");
-	line = "";
+	line = ft_strdup("");
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
 	if (read(fd, line, 0) < 0)
@@ -115,7 +124,7 @@ char	*get_next_line(int fd)
 
 	return (line);
 }
-/*
+
 int	main (void)
 {
 	int fd;
@@ -144,4 +153,3 @@ int	main (void)
 	close(fd);
 	return (0);
 }
-*/

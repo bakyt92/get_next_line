@@ -36,7 +36,7 @@ char		*ft_del_one_line(char *main_str);
 //# define BUFFER_SIZE 0
 //
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1000000
 # endif
 
 # endif
