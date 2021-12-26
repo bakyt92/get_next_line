@@ -62,12 +62,10 @@ char	*ft_get_one_line(char *main_str)
 		line[i] = main_str[i];
 		i++;
 	}
-//	if (main_str[i] == '\n')
-//	{
-//		line[i] = main_str[i];
-//		i++;
-//	}
-	line[i] = '\n';
+	if (main_str[i] == '\n')
+		line[i] = main_str[i];
+	else
+		line[i] = '\0';
 	i++;
 	line[i] = '\0';
 	return(line);
@@ -160,12 +158,12 @@ int	main (void)
 //	line = ft_strdup("");
 	line = "";
 
-	fd = open("test_text.txt", O_RDONLY);
+	fd = open("41_no_nl", O_RDONLY);
 	printf("fd after = %d \n", fd);
 //	printf("%d", fd);
 	while (iter--)
 	{
-		printf("iter = %d \t", iter);
+//		printf("\t iter = %d \t", iter);
 		line = get_next_line(fd);
 		if (!line)
 		{
