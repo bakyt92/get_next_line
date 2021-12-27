@@ -6,7 +6,7 @@
 /*   By: ufitzhug <ufitzhug@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:02:30 by ufitzhug          #+#    #+#             */
-/*   Updated: 2021/12/18 18:02:51 by ufitzhug         ###   ########.fr       */
+/*   Updated: 2021/12/26 19:41:12 by ufitzhug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,112 +37,43 @@ char	*ft_strchr(const char *s, int ch)
 	while (*s)
 	{
 		if (*s == (char)ch)
-			return((char *)s);
-		else s++;
+			return ((char *)s);
+		else
+			s++;
 	}
 	if (*s == (char)ch)
-		return((char *)s);
+		return ((char *)s);
 	return (0);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char	*ft_strjoin(char *s1, char *s2)
 {
+	char	*str;
 	size_t	i;
+	size_t	j;
 
-	i = 0;
-	if (dstsize >= 1)
-	{
-		while ((i <= dstsize - 1) && src[i])
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (ft_strlen(src));
-}
-
-char	*ft_strjoin(char **s1, char *s2)
-{
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*strcat;
 	if (!s1)
 	{
-		*s1 = (char *) malloc (1 * sizeof(char));
-		*s1[0] = '\0';
+		s1 = (char *)malloc(sizeof(char) * 1);
+		s1[0] = '\0';
 	}
-	if (!*s1 || !s2)
+	if (!s1 || !s2)
 		return (NULL);
-	s1_len = ft_strlen(*s1);
-	s2_len = ft_strlen(s2);
-	strcat = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (!strcat)
+	str = malloc(sizeof(char) * (ft_strlen((char *)s1) \
+	+ ft_strlen((char *)s2) + 1));
+	if (!str)
 		return (NULL);
-	ft_strlcpy(strcat, *s1, s1_len + 1);
-	ft_strlcpy(&strcat[s1_len], s2, s2_len + 1);
-	free (*s1);
-	return (strcat);
+	j = 0;
+	i = 0;
+	while (s1[j])
+		str[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	free (s1);
+	return (str);
 }
-
-//
-//char	*ft_strjoin(char *s1, char *s2)
-//{
-//	char	*dest;
-//	int		i;
-//	int		j;
-//
-//	if (!s1)
-//	{
-//		s1 = (char *) malloc (1 * sizeof(char));
-//		s1[0] = '\0';
-//	}
-//	if (!s1 || !s2)
-//		return (NULL);
-//	dest = (char *)malloc(sizeof(char) * (ft_strlen((s1) +
-//													ft_strlen(s2) + 1)));
-//	if (!dest)
-//		return (NULL);
-//	i = 0;
-//	while (s1[i])
-//	{
-//		dest[i] = s1[i];
-//		i++;
-//	}
-//	j = 0;
-//	while (s2[j])
-//	{
-//		dest[i] = s2[j];
-//		j++;
-//		i++;
-//	}
-//	free(s1);
-//	dest[i] = '\0';
-//	return (dest);
-//}
-
-//static char	*ft_dest(char const *s1, char const *s2, char *dest)
-//{
-//	size_t	len1;
-//	size_t	len2;
-//	size_t	i;
-//
-//	len1 = ft_strlen((char *)s1);
-//	len2 = ft_strlen((char *)s2);
-//	i = 0;
-//	while (i < len1)
-//	{
-//		dest[i] = s1[i];
-//		i++;
-//	}
-//	while (i < len2 + len1)
-//	{
-//		dest[i] = s2[i - len1];
-//		i++;
-//	}
-//	dest[i] = '\0';
-//	return (dest);
-//}
 
 size_t	ft_strlen(const char *str)
 {
